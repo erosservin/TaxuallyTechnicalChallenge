@@ -1,12 +1,22 @@
 using Taxually.TechnicalTest.VatRegistrationService.DTO;
+using Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;
 
 namespace Taxually.TechnicalTest.VatRegistrationService;
 
 public class VatRegistrationService : IVatRegistrationService
 {
+    private readonly IVatRegistrationHandlerResolver vatRegistrationHandlerResolver;
+
+    public VatRegistrationService(IVatRegistrationHandlerResolver vatRegistrationHandlerResolver)
+    {
+        this.vatRegistrationHandlerResolver = vatRegistrationHandlerResolver;
+    }
+
     public Task RegisterAsync(VatRegistrationRequestDto request)
     {
         // Resolve handler
+        // Map to VatRegistrationRequest
+        // vatRegistrationHandlerResolver.Resolve(request.CountryCode).HandleRequest(request);
         throw new NotImplementedException();
         
         //     switch (request.Country)
