@@ -1,3 +1,4 @@
+using Taxually.TechnicalTest.VatRegistrationService.MappingProfile;
 using Taxually.TechnicalTest.VatRegistrationService.Utility;
 using Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;
 
@@ -9,6 +10,7 @@ public static class ServiceRegistration
     {
         // VatRegistrationService
         services.AddScoped<IVatRegistrationService, VatRegistrationService>();
+        services.AddAutoMapper(typeof(VatRegistrationServiceMappingProfile));
 
         // VatRegistrationHandlers
         services.AddSingleton<IVatRegistrationHandlerResolver, VatRegistrationHandlerResolver>();
