@@ -7,6 +7,11 @@ public class VatRegistrationHandlerResolver : IVatRegistrationHandlerResolver
     private readonly Dictionary<SupportedCountryCodesEnum, IVatRegistrationHandler> vatRegistrationHandlers;
     public VatRegistrationHandlerResolver(IEnumerable<IVatRegistrationHandler> vatRegistrationHandlers)
     {
+        if (vatRegistrationHandlers == null || !vatRegistrationHandlers.Any())
+        {
+            throw new ArgumentException("List cannot be empty or null.", nameof(vatRegistrationHandlers));
+        }
+        
         this.vatRegistrationHandlers = vatRegistrationHandlers.ToDictionary( x => x.CountryCode, x => x);
     }
 
