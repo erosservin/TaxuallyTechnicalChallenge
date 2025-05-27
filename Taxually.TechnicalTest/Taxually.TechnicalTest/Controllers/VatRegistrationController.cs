@@ -23,8 +23,15 @@ namespace Taxually.TechnicalTest.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] VatRegistrationRequestDto request)
         {
-            await vatRegistrationService.RegisterAsync(request);
-            return Ok();
+            try
+            {
+                await vatRegistrationService.RegisterAsync(request);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

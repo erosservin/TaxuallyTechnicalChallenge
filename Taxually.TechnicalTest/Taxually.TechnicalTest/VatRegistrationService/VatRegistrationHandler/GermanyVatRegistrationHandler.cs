@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using Taxually.TechnicalTest.VatRegistrationService.Model;
 using Taxually.TechnicalTest.VatRegistrationService.Utility;
 
@@ -13,8 +14,15 @@ public class GermanyVatRegistrationHandler : IVatRegistrationHandler
 
     public SupportedCountryCodesEnum CountryCode => SupportedCountryCodesEnum.DE;
 
-    public Task HandleRequest(VatRegistrationRequest request)
+    public Task HandleRequestAsync(VatRegistrationRequest request)
     {
-        throw new NotImplementedException();
+        // Germany requires an XML document to be uploaded to register for a VAT number
+        using var stringwriter = new StringWriter();
+        var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
+        serializer.Serialize(stringwriter, this);
+        var xml = stringwriter.ToString();
+        var xmlQueueClient = new TaxuallyQueueClient();
+        // Queue xml doc to be processed
+        return xmlQueueClient.EnqueueAsync("vat-registration-xml", xml);
     }
 }

@@ -13,8 +13,8 @@ public class UkVatRegistrationHandler : IVatRegistrationHandler
 
     public SupportedCountryCodesEnum CountryCode => SupportedCountryCodesEnum.GB;
 
-    public Task HandleRequest(VatRegistrationRequest request)
+    public Task HandleRequestAsync(VatRegistrationRequest request)
     {
-        throw new NotImplementedException();
+        return taxuallyHttpClient.PostAsync("https://api.uktax.gov.uk", request);
     }
 }
