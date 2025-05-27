@@ -6,10 +6,12 @@ namespace Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;
 public class GermanyVatRegistrationHandler : IVatRegistrationHandler
 {
     private readonly ITaxuallyQueueClient taxuallyQueueClient;
+    private readonly IConfiguration configuration;
 
-    public GermanyVatRegistrationHandler(ITaxuallyQueueClient taxuallyQueueClient)
+    public GermanyVatRegistrationHandler(ITaxuallyQueueClient taxuallyQueueClient, IConfiguration configuration)
     {
         this.taxuallyQueueClient = taxuallyQueueClient;
+        this.configuration = configuration;
     }
 
     public SupportedCountryCodesEnum CountryCode => SupportedCountryCodesEnum.DE;
@@ -23,6 +25,6 @@ public class GermanyVatRegistrationHandler : IVatRegistrationHandler
         var xml = stringwriter.ToString();
         var xmlQueueClient = new TaxuallyQueueClient();
         // Queue xml doc to be processed
-        return xmlQueueClient.EnqueueAsync("vat-registration-xml", xml);
+        return xmlQueueClient.EnqueueAsync(configuration["VatRegistrationHandler:DE:QueueName"], xml);
     }
 }

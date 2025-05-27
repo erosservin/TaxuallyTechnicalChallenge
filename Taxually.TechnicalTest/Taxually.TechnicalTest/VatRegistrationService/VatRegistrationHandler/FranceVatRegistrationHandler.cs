@@ -6,10 +6,11 @@ namespace Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;
 public class FranceVatRegistrationHandler : IVatRegistrationHandler
 {
     private readonly ITaxuallyQueueClient taxuallyQueueClient;
-
-    public FranceVatRegistrationHandler(ITaxuallyQueueClient taxuallyQueueClient)
+    private readonly IConfiguration configuration;
+    public FranceVatRegistrationHandler(ITaxuallyQueueClient taxuallyQueueClient, IConfiguration configuration)
     {
         this.taxuallyQueueClient = taxuallyQueueClient;
+        this.configuration = configuration;
     }
 
     public SupportedCountryCodesEnum CountryCode => SupportedCountryCodesEnum.FR;
@@ -22,6 +23,6 @@ public class FranceVatRegistrationHandler : IVatRegistrationHandler
         csvBuilder.AppendLine($"{request.CompanyName}{request.CompanyId}");
         var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
         // Queue file to be processed
-        return taxuallyQueueClient.EnqueueAsync("vat-registration-csv", csv);
+        return taxuallyQueueClient.EnqueueAsync(configuration["VatRegistrationHandler:FR:QueueName"], csv);
     }
 }

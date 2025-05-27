@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+using Moq;
 using Taxually.TechnicalTest.VatRegistrationService.Utility;
 using Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;
 
@@ -9,7 +11,7 @@ public class VatRegistrationHandlerResolverTests
     [Test]
     public void ShouldResolveVatRegistrationHandler()
     {
-        var expectedRegistrationHandler = new UkVatRegistrationHandler(new TaxuallyHttpClient());
+        var expectedRegistrationHandler = new UkVatRegistrationHandler(Mock.Of<TaxuallyHttpClient>(), Mock.Of<IConfiguration>());
         IEnumerable<IVatRegistrationHandler> vatRegistrationHandlers = [expectedRegistrationHandler];
 
         var handler = new VatRegistrationHandlerResolver(vatRegistrationHandlers);
@@ -22,7 +24,7 @@ public class VatRegistrationHandlerResolverTests
     public void VatRegistrationHandlerResolverCannotBeConstructed_ThrowsArgumentException()
     {
         IEnumerable<IVatRegistrationHandler> vatRegistrationHandlers = [];
-        
+
         Assert.Throws<ArgumentException>(() => new VatRegistrationHandlerResolver(vatRegistrationHandlers));
     }
 }
