@@ -1,4 +1,4 @@
-using Taxually.TechnicalTest.VatRegistrationService.Entity;
+using Taxually.TechnicalTest.VatRegistrationService.Model;
 using Taxually.TechnicalTest.VatRegistrationService.Utility;
 
 namespace Taxually.TechnicalTest.VatRegistrationService.VatRegistrationHandler;

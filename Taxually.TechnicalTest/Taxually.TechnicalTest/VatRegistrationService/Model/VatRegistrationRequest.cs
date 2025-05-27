@@ -1,4 +1,4 @@
-namespace Taxually.TechnicalTest.VatRegistrationService.Entity
+namespace Taxually.TechnicalTest.VatRegistrationService.Model
 {
     public class VatRegistrationRequest
     {
