@@ -1,5 +1,15 @@
 # Taxually technical test
 
+### Notes from Ervin
+_Refactoring key aspects:_
+* Separating business logic from the controller by introducing a feature-specific service layer.
+* To support country-specific registration methods, a factory pattern was implemented.
+* A test project was added to separate test-related code from the source code.
+* Dependencies are injected through constructors, thus improving the testability.
+* No additional feature was added to the product that would be outside the refactoring scope. (Considerations: input validation, custom HTTP responses with descriptive messages, generic CSV/XML builder)
+
+---------------
+
 This solution contains an [API endpoint](https://github.com/Taxually/developer-test/blob/main/Taxually.TechnicalTest/Taxually.TechnicalTest/Controllers/VatRegistrationController.cs) to register a company for a VAT number. Different approaches are required based on the country where the company is based:
 
 - UK companies can register via an API
