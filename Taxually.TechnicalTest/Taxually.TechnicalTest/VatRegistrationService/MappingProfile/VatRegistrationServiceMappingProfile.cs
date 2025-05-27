@@ -15,8 +15,10 @@ public class VatRegistrationServiceMappingProfile : Profile
 
     private static TEnum ParseEnum<TEnum>(string? value)
     {
-#pragma warning disable CS8604 // Possible null reference argument.
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
         return (TEnum)Enum.Parse(typeof(TEnum), value);
-#pragma warning restore CS8604 // Possible null reference argument.
     }
 }

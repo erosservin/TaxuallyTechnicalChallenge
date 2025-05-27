@@ -13,7 +13,7 @@ public static class ServiceRegistration
         services.AddAutoMapper(typeof(VatRegistrationServiceMappingProfile));
 
         // VatRegistrationHandlers
-        services.AddSingleton<IVatRegistrationHandlerResolver, VatRegistrationHandlerResolver>();
+        services.AddScoped<IVatRegistrationHandlerResolver, VatRegistrationHandlerResolver>();
         services.AddScoped<IVatRegistrationHandler, UkVatRegistrationHandler>();
         services.AddScoped<IVatRegistrationHandler, FranceVatRegistrationHandler>();
         services.AddScoped<IVatRegistrationHandler, GermanyVatRegistrationHandler>();

@@ -28,9 +28,11 @@ namespace Taxually.TechnicalTest.Controllers
                 await vatRegistrationService.RegisterAsync(request);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest(ex.Message);
+                // Exception should be logged
+                // A localized user facing message should be returned
+                return BadRequest("Incorrect input data");
             }
         }
     }
