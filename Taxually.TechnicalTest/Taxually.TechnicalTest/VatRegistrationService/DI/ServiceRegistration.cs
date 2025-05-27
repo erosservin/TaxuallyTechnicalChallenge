@@ -8,17 +8,17 @@ public static class ServiceRegistration
     public static IServiceCollection AddVatRegistrationService(this IServiceCollection services)
     {
         // VatRegistrationService
-        services.AddTransient<IVatRegistrationService, VatRegistrationService>();
+        services.AddScoped<IVatRegistrationService, VatRegistrationService>();
 
         // VatRegistrationHandlers
-        services.AddTransient<IVatRegistrationHandlerResolver, VatRegistrationHandlerResolver>();
-        services.AddTransient<IVatRegistrationHandler, UkVatRegistrationHandler>();
-        services.AddTransient<IVatRegistrationHandler, FranceVatRegistrationHandler>();
-        services.AddTransient<IVatRegistrationHandler, GermanyVatRegistrationHandler>();
+        services.AddSingleton<IVatRegistrationHandlerResolver, VatRegistrationHandlerResolver>();
+        services.AddScoped<IVatRegistrationHandler, UkVatRegistrationHandler>();
+        services.AddScoped<IVatRegistrationHandler, FranceVatRegistrationHandler>();
+        services.AddScoped<IVatRegistrationHandler, GermanyVatRegistrationHandler>();
 
         // Utility
-        services.AddTransient<ITaxuallyHttpClient, TaxuallyHttpClient>();
-        services.AddTransient<ITaxuallyQueueClient, TaxuallyQueueClient>();
+        services.AddScoped<ITaxuallyHttpClient, TaxuallyHttpClient>();
+        services.AddScoped<ITaxuallyQueueClient, TaxuallyQueueClient>();
 
         return services;
     }
