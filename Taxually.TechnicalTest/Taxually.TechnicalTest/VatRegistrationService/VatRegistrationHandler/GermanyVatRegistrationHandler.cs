@@ -23,8 +23,7 @@ public class GermanyVatRegistrationHandler : IVatRegistrationHandler
         var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
         serializer.Serialize(stringwriter, request);
         var xml = stringwriter.ToString();
-        var xmlQueueClient = new TaxuallyQueueClient();
         // Queue xml doc to be processed
-        return xmlQueueClient.EnqueueAsync(configuration["VatRegistrationHandler:DE:QueueName"], xml);
+        return taxuallyQueueClient.EnqueueAsync(configuration["VatRegistrationHandler:DE:QueueName"], xml);
     }
 }

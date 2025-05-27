@@ -5,11 +5,6 @@ namespace Taxually.TechnicalTest.Tests.VatRegistrationService.Utility;
 [TestFixture]
 public class TaxuallyQueueClientTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public void PostAsyncShouldCompleteSuccessfully()
     {
